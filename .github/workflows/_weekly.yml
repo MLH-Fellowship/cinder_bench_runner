@@ -1,0 +1,48 @@
+---
+name: _weekly
+
+"on":
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  weekly:
+    uses: ./.github/workflows/_benchmark.yml
+    with:
+      fork: python
+      ref: main
+      machine: all
+      benchmarks: all
+      pgo: true
+    secrets: inherit
+
+  # TODO: Make weekly branches configurable
+
+  weekly-312:
+    uses: ./.github/workflows/_benchmark.yml
+    with:
+      fork: python
+      ref: 3.12
+      machine: all
+      benchmarks: all
+      pgo: true
+    secrets: inherit
+
+  pystats:
+    uses: ./.github/workflows/_pystats.yml
+    with:
+      fork: python
+      ref: main
+      benchmarks: all
+
+  generate:
+    uses: ./.github/workflows/_generate.yml
+    with:
+      force: false
+    needs: [weekly, pystats]
+    secrets: inherit
+
+  publish:
+    uses: ./.github/workflows/_publish.yml
+    needs: [weekly, pystats]
+    secrets: inherit
