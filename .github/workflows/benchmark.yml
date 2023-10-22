@@ -16,7 +16,7 @@ on:
         default: linux-amd64
         type: choice
         options:
-        - linux-x64-linux-x64-ec2runner
+        - linux-x64-ec2runner
         - all
       benchmarks:
         description: Benchmarks to run (comma-separated; empty runs all benchmarks)

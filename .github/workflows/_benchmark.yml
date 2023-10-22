@@ -48,7 +48,7 @@ on:
         default: linux-amd64
         type: choice
         options:
-        - linux-x64-linux-x64-ec2runner
+        - linux-x64-ec2runner
         - all
       benchmarks:
         description: Benchmarks to run (comma-separated; empty runs all benchmarks)
@@ -67,8 +67,8 @@ on:
         type: boolean
 
 jobs:
-  benchmark-linux-x64-linux-x64-ec2runner:
-    runs-on: [self-hosted, linux, bare-metal, linux-x64-linux-x64-ec2runner]
+  benchmark-linux-x64-ec2runner:
+    runs-on: [self-hosted, Linux, bare-metal, linux-x64-ec2runner]
 
     steps:
     - uses: actions/checkout@v3
@@ -158,5 +158,5 @@ jobs:
       with:
         add: results
 
-    if: ${{ (inputs.machine == 'linux-x64-linux-x64-ec2runner' || inputs.machine ==
+    if: ${{ (inputs.machine == 'linux-x64-ec2runner' || inputs.machine ==
       'all') }}
