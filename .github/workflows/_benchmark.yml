@@ -121,6 +121,10 @@ jobs:
     - name: Tune for perf
       run: |
         sudo bash -c "echo 100000 > /proc/sys/kernel/perf_event_max_sample_rate"
+    - name: Install zlib dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y zlib1g-dev
     - name: Running pyperformance
       run: |
         rm -rf ~/.debug/*
