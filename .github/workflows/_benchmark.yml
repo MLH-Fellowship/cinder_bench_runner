@@ -108,9 +108,8 @@ jobs:
     - name: Build Python
       run: |
         cd cinder
-        export OPT=-O2
         ./configure --with-pydebug
-        make -j
+        make -s
     - name: Install pyperformance
       run: |
         venv/bin/python -m pip install --no-binary :all: ./pyperformance
