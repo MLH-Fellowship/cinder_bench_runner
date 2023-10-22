@@ -106,6 +106,7 @@ jobs:
     - name: Build Python
       if: ${{ steps.should_run.outputs.should_run != 'false' }}
       run: |
+        cd cinder
         export OPT=-O2
         ./configure --with-pydebug
         make -j

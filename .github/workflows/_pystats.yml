@@ -9,9 +9,9 @@ env:
   workflow_dispatch:
     inputs:
       fork:
-        description: 'Fork of cpython to benchmark'
+        description: 'Fork of cinder to benchmark'
         type: string
-        default: python
+        default: facebookincubator
       ref:
         description: 'Branch, tag or (full) SHA commit to benchmark'
         type: string
@@ -56,9 +56,9 @@ jobs:
           cache: pip
       - uses: actions/checkout@v3
         with:
-          repository: ${{ inputs.fork }}/cpython
+          repository: ${{ inputs.fork }}/cinder
           ref: ${{ inputs.ref }}
-          path: cpython
+          path: cinder
       - name: Install dependencies
         run: |
           python -m pip install -r requirements.txt
@@ -88,7 +88,7 @@ jobs:
       - name: Compile
         if: ${{ steps.should_run.outputs.should_run != 'false' }}
         run: |
-          cd cpython
+          cd cinder
           ./configure --enable-pystats --prefix=$PWD/install
           make -j4
           make install
@@ -99,7 +99,7 @@ jobs:
       - name: Running pyperformance
         if: ${{ steps.should_run.outputs.should_run != 'false' }}
         run: |
-          python -m bench_runner.scripts.run_benchmarks pystats cpython/python ${{ inputs.fork }} ${{ inputs.ref }} ${{ inputs.benchmarks || 'all' }} false
+          python -m bench_runner.scripts.run_benchmarks pystats cinder/python ${{ inputs.fork }} ${{ inputs.ref }} ${{ inputs.benchmarks || 'all' }} false
       - name: pull
         if: ${{ steps.should_run.outputs.should_run != 'false' }}
         run: |
