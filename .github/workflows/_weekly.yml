@@ -9,7 +9,7 @@ jobs:
   weekly:
     uses: ./.github/workflows/_benchmark.yml
     with:
-      fork: python
+      fork: facebookincubator
       ref: main
       machine: all
       benchmarks: all
@@ -21,8 +21,7 @@ jobs:
   weekly-312:
     uses: ./.github/workflows/_benchmark.yml
     with:
-      fork: python
-      ref: 3.12
+      fork: facebookincubator
       machine: all
       benchmarks: all
       pgo: true
@@ -31,7 +30,7 @@ jobs:
   pystats:
     uses: ./.github/workflows/_pystats.yml
     with:
-      fork: python
+      fork: facebookincubator
       ref: main
       benchmarks: all
 
