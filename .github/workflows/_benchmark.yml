@@ -113,6 +113,8 @@ jobs:
     - name: Install pyperformance
       run: |
         venv/bin/python -m pip install --no-binary :all: ./pyperformance
+    - name: Load msr module
+      run: sudo modprobe msr
     - name: Tune system
       run: |
         sudo LD_LIBRARY_PATH=$LD_LIBRARY_PATH venv/bin/python -m pyperf system tune
