@@ -144,6 +144,8 @@ jobs:
     - name: Tune for perf
       run: |
         sudo bash -c "echo 100000 > /proc/sys/kernel/perf_event_max_sample_rate"
+    - name: Create symbolic link between cinder and cpython
+      run: ln -s cinder cpython
     - name: Running pyperformance
       run: |
         rm -rf ~/.debug/*
