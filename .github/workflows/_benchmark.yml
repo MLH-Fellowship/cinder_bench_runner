@@ -128,7 +128,7 @@ jobs:
     - name: Running pyperformance
       run: |
         rm -rf ~/.debug/*
-        venv/bin/python -m bench_runner.scripts.run_benchmarks benchmark cinder/python ${{ inputs.fork }} ${{ inputs.ref }} ${{ inputs.benchmarks || 'all' }} ${{ inputs.perf }} --run_id ${{ github.run_id }}
+        venv/bin/python -m ./scripts/run_benchmarks.py benchmark cinder/python ${{ inputs.fork }} ${{ inputs.ref }} ${{ inputs.benchmarks || 'all' }} ${{ inputs.perf }} --run_id ${{ github.run_id }}
     - name: Upload benchmark artifacts
       uses: actions/upload-artifact@v3
       with:
