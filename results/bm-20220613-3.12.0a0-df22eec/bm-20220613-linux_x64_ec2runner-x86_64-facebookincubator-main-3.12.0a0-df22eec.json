@@ -1,0 +1,464 @@
+{
+  "benchmarks": [
+    {
+      "runs": [
+        {
+          "metadata": {
+            "calibrate_loops": 1,
+            "command_max_rss": 27959296,
+            "date": "2023-10-27 06:27:19.727100",
+            "duration": 47.048150846967474,
+            "load_avg_1min": 1.11,
+            "uptime": 376124.76592803
+          },
+          "warmups": [
+            [
+              1,
+              12.68086945998948
+            ],
+            [
+              1,
+              10.205136040982325
+            ],
+            [
+              1,
+              10.296123981999699
+            ],
+            [
+              1,
+              10.246178268047515
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27000832,
+            "date": "2023-10-27 06:28:05.888267",
+            "duration": 44.51035534602124,
+            "load_avg_1min": 1.05,
+            "uptime": 376170.92724227905
+          },
+          "values": [
+            10.209966081019957,
+            10.077644032018725,
+            10.303043364023324
+          ],
+          "warmups": [
+            [
+              1,
+              10.314277235011104
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27131904,
+            "date": "2023-10-27 06:28:52.533023",
+            "duration": 45.002226576034445,
+            "load_avg_1min": 1.02,
+            "uptime": 376217.5352010727
+          },
+          "values": [
+            10.243423481006175,
+            10.61735348898219,
+            10.426091809000354
+          ],
+          "warmups": [
+            [
+              1,
+              10.071006422978826
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27000832,
+            "date": "2023-10-27 06:29:39.381989",
+            "duration": 45.20213396596955,
+            "load_avg_1min": 1.07,
+            "uptime": 376264.4204220772
+          },
+          "values": [
+            10.133420086000115,
+            10.685373791959137,
+            10.3642053839867
+          ],
+          "warmups": [
+            [
+              1,
+              10.414062137017027
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27131904,
+            "date": "2023-10-27 06:30:26.112513",
+            "duration": 45.055507563985884,
+            "load_avg_1min": 1.03,
+            "uptime": 376311.1512067318
+          },
+          "values": [
+            10.271294899983332,
+            10.243493332003709,
+            10.327028063999023
+          ],
+          "warmups": [
+            [
+              1,
+              10.482377945038024
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27000832,
+            "date": "2023-10-27 06:31:12.437555",
+            "duration": 44.685547761037014,
+            "load_avg_1min": 1.01,
+            "uptime": 376357.47586512566
+          },
+          "values": [
+            10.2837568539544,
+            10.359980147040915,
+            10.23956860403996
+          ],
+          "warmups": [
+            [
+              1,
+              10.195098325959407
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27131904,
+            "date": "2023-10-27 06:31:58.524423",
+            "duration": 44.48422644101083,
+            "load_avg_1min": 1.0,
+            "uptime": 376403.56301546097
+          },
+          "values": [
+            10.182328991009854,
+            10.12077954900451,
+            10.360307261988055
+          ],
+          "warmups": [
+            [
+              1,
+              10.220496549038216
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27000832,
+            "date": "2023-10-27 06:32:44.997273",
+            "duration": 44.7880357389804,
+            "load_avg_1min": 1.0,
+            "uptime": 376450.035913229
+          },
+          "values": [
+            10.040905320027377,
+            10.23960451799212,
+            10.372293280961458
+          ],
+          "warmups": [
+            [
+              1,
+              10.406701878993772
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27000832,
+            "date": "2023-10-27 06:33:34.713947",
+            "duration": 47.879021078988444,
+            "load_avg_1min": 1.08,
+            "uptime": 376499.752679348
+          },
+          "values": [
+            10.318492521008011,
+            10.236177754006349,
+            10.417030317010358
+          ],
+          "warmups": [
+            [
+              1,
+              12.610620683000889
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27131904,
+            "date": "2023-10-27 06:34:22.904743",
+            "duration": 46.625646612024866,
+            "load_avg_1min": 1.13,
+            "uptime": 376547.90691947937
+          },
+          "values": [
+            11.924291645002086,
+            10.479393790999893,
+            10.29125752899563
+          ],
+          "warmups": [
+            [
+              1,
+              10.287196241028141
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27000832,
+            "date": "2023-10-27 06:35:08.996275",
+            "duration": 44.48680992599111,
+            "load_avg_1min": 1.06,
+            "uptime": 376594.03478455544
+          },
+          "values": [
+            10.169289070006926,
+            10.160724086978007,
+            10.279774320952129
+          ],
+          "warmups": [
+            [
+              1,
+              10.256323611014523
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27000832,
+            "date": "2023-10-27 06:35:55.936207",
+            "duration": 45.306441560038365,
+            "load_avg_1min": 1.03,
+            "uptime": 376640.9747543335
+          },
+          "values": [
+            10.270305237965658,
+            10.418110707949381,
+            10.317008342011832
+          ],
+          "warmups": [
+            [
+              1,
+              10.573463380977046
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27131904,
+            "date": "2023-10-27 06:36:42.423952",
+            "duration": 44.84734459000174,
+            "load_avg_1min": 1.01,
+            "uptime": 376687.42611408234
+          },
+          "values": [
+            10.209039871988352,
+            10.272709704004228,
+            10.13855330797378
+          ],
+          "warmups": [
+            [
+              1,
+              10.429190776019823
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27131904,
+            "date": "2023-10-27 06:37:27.928309",
+            "duration": 43.85931029700441,
+            "load_avg_1min": 1.0,
+            "uptime": 376732.96695041656
+          },
+          "values": [
+            10.169389914954081,
+            9.899017506977543,
+            10.169788510014769
+          ],
+          "warmups": [
+            [
+              1,
+              10.050607572018635
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27000832,
+            "date": "2023-10-27 06:38:14.242633",
+            "duration": 44.66431551298592,
+            "load_avg_1min": 1.29,
+            "uptime": 376779.27704548836
+          },
+          "values": [
+            10.176086266990751,
+            10.286122991004959,
+            10.43184008001117
+          ],
+          "warmups": [
+            [
+              1,
+              10.159511545964051
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27131904,
+            "date": "2023-10-27 06:39:04.366529",
+            "duration": 48.488342682947405,
+            "load_avg_1min": 1.19,
+            "uptime": 376829.36862516403
+          },
+          "values": [
+            10.07783623598516,
+            13.649012672016397,
+            10.839742279029451
+          ],
+          "warmups": [
+            [
+              1,
+              10.251808484958019
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27000832,
+            "date": "2023-10-27 06:39:51.007390",
+            "duration": 44.99308067798847,
+            "load_avg_1min": 1.09,
+            "uptime": 376876.0422692299
+          },
+          "values": [
+            10.562038273958024,
+            10.223181298992131,
+            10.198143151996192
+          ],
+          "warmups": [
+            [
+              1,
+              10.369158089975826
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27000832,
+            "date": "2023-10-27 06:40:37.382784",
+            "duration": 44.739448720996734,
+            "load_avg_1min": 1.04,
+            "uptime": 376922.3850045204
+          },
+          "values": [
+            10.373532383993734,
+            10.224730661022477,
+            10.263246011978481
+          ],
+          "warmups": [
+            [
+              1,
+              10.151027916988824
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27000832,
+            "date": "2023-10-27 06:41:23.652309",
+            "duration": 44.61891374801053,
+            "load_avg_1min": 1.02,
+            "uptime": 376968.65451288223
+          },
+          "values": [
+            10.119103158009239,
+            10.195456429966725,
+            10.411742443044204
+          ],
+          "warmups": [
+            [
+              1,
+              10.173954944999423
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27131904,
+            "date": "2023-10-27 06:42:09.729665",
+            "duration": 44.37992983596632,
+            "load_avg_1min": 1.01,
+            "uptime": 377014.7680680752
+          },
+          "values": [
+            10.167581632966176,
+            10.205238761031069,
+            10.23418165295152
+          ],
+          "warmups": [
+            [
+              1,
+              10.15159424598096
+            ]
+          ]
+        },
+        {
+          "metadata": {
+            "command_max_rss": 27000832,
+            "date": "2023-10-27 06:42:56.411209",
+            "duration": 45.07287927699508,
+            "load_avg_1min": 1.0,
+            "uptime": 377061.4496538639
+          },
+          "values": [
+            10.488833167997655,
+            10.141950038960204,
+            10.348755899001844
+          ],
+          "warmups": [
+            [
+              1,
+              10.394608072994743
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "aslr": "Full randomization",
+    "boot_time": "2023-10-22 21:58:35",
+    "command": "/home/ubuntu/actions-runner/_work/cinder_bench_runner/cinder_bench_runner/venv/cpython3.12-b9a1a0e0f5e2-compat-cb0795d2cf97/bin/python -m lib2to3 -f all /home/ubuntu/actions-runner/_work/cinder_bench_runner/cinder_bench_runner/venv/lib/python3.10/site-packages/pyperformance/data-files/benchmarks/bm_2to3/data/2to3/context_processors.py.txt /home/ubuntu/actions-runner/_work/cinder_bench_runner/cinder_bench_runner/venv/lib/python3.10/site-packages/pyperformance/data-files/benchmarks/bm_2to3/data/2to3/template_loader.py.txt /home/ubuntu/actions-runner/_work/cinder_bench_runner/cinder_bench_runner/venv/lib/python3.10/site-packages/pyperformance/data-files/benchmarks/bm_2to3/data/2to3/signals.py.txt /home/ubuntu/actions-runner/_work/cinder_bench_runner/cinder_bench_runner/venv/lib/python3.10/site-packages/pyperformance/data-files/benchmarks/bm_2to3/data/2to3/urlresolvers.py.txt /home/ubuntu/actions-runner/_work/cinder_bench_runner/cinder_bench_runner/venv/lib/python3.10/site-packages/pyperformance/data-files/benchmarks/bm_2to3/data/2to3/exceptions.py.txt /home/ubuntu/actions-runner/_work/cinder_bench_runner/cinder_bench_runner/venv/lib/python3.10/site-packages/pyperformance/data-files/benchmarks/bm_2to3/data/2to3/mail.py.txt /home/ubuntu/actions-runner/_work/cinder_bench_runner/cinder_bench_runner/venv/lib/python3.10/site-packages/pyperformance/data-files/benchmarks/bm_2to3/data/2to3/xheaders.py.txt /home/ubuntu/actions-runner/_work/cinder_bench_runner/cinder_bench_runner/venv/lib/python3.10/site-packages/pyperformance/data-files/benchmarks/bm_2to3/data/2to3/__init__.py.txt /home/ubuntu/actions-runner/_work/cinder_bench_runner/cinder_bench_runner/venv/lib/python3.10/site-packages/pyperformance/data-files/benchmarks/bm_2to3/data/2to3/paginator.py.txt",
+    "cpu_config": "idle:acpi_idle",
+    "cpu_count": 1,
+    "cpu_freq": "0=2400 MHz",
+    "cpu_model_name": "Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz",
+    "description": "Performance of the Python 2to3 program",
+    "hostname": "ip-172-31-39-234",
+    "loops": 1,
+    "name": "2to3",
+    "perf_version": "2.6.0",
+    "performance_version": "1.0.7",
+    "platform": "Linux-6.2.0-1014-aws-x86_64-with-glibc2.35",
+    "runnable_threads": 1,
+    "tags": [
+      "apps"
+    ],
+    "unit": "second",
+    "commit_id": "df22eec",
+    "commit_fork": "facebookincubator",
+    "commit_branch": "main",
+    "commit_date": "2022-06-13T20:09:40+02:00",
+    "benchmark_hash": "7bffeb",
+    "github_action_url": "https://github.com/MLH-Fellowship/cinder_bench_runner/actions/runs/6663387895"
+  },
+  "version": "1.0"
+}
