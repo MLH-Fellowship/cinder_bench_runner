@@ -144,6 +144,9 @@ jobs:
     - name: Tune for perf
       run: |
         sudo bash -c "echo 100000 > /proc/sys/kernel/perf_event_max_sample_rate"
+    # Creating a symbolic link between 'cinder' and 'cpython'.
+    # Some scripts and tools expect the Python source to be in a directory named 'cpython'.
+    # This link ensures compatibility without needing to modify those scripts.
     - name: Create symbolic link between cinder and cpython
       run: ln -s cinder cpython
     - name: Running pyperformance
