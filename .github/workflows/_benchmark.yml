@@ -68,7 +68,7 @@ on:
         type: boolean
 
 jobs:
-    
+
   setup:
     runs-on: [self-hosted, Linux, bare-metal, linux-x64-ec2runner]
 
@@ -95,6 +95,7 @@ jobs:
           ${{ runner.os }}-ccache-
 
   benchmark-linux-x64-ec2runner:
+    needs: setup
     runs-on: [self-hosted, Linux, bare-metal, linux-x64-ec2runner]
 
     steps:
