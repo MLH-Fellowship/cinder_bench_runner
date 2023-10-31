@@ -11,6 +11,10 @@ on:
       ref:
         description: Branch, tag or (full) SHA commit to benchmark
         default: main
+      base_version:
+        description: Python version to use as the base
+        type: string
+        default: '3.11'
       machine:
         description: Machine to run on
         default: linux-amd64
@@ -31,38 +35,8 @@ on:
         default: false
 
 jobs:
-  # Determine the base commit of the selected commit. The output is passed to
-  # the `base` job below. If the data already exists for this commit, it will be
-  # skipped.
-  determine_base:
-    runs-on: ubuntu-latest
-    outputs:
-      ref: ${{ steps.base.outputs.ref }}
-      need_to_run: ${{ steps.base.outputs.need_to_run }}
-    steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        cache: pip
-    - uses: actions/checkout@v3
-      if: ${{ inputs.benchmark_base }}
-      with:
-        repository: ${{ inputs.fork }}/cinder
-        path: cinder
-        ref: ${{ inputs.ref }}
-        fetch-depth: 0
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-    - name: Determine base
-      id: base
-      run: |
-        python ./scripts/get_merge_base.py ${{ inputs.benchmark_base }} ${{ inputs.machine }} >> $GITHUB_OUTPUT
-        cat $GITHUB_OUTPUT
-
   head:
-    uses: ./.github/workflows/_benchmark.yml
+    uses: ./.github/workflows/_benchmark_cinder.yml
     with:
       fork: ${{ inputs.fork }}
       ref: ${{ inputs.ref }}
@@ -75,11 +49,9 @@ jobs:
 
   base:
     uses: ./.github/workflows/_benchmark.yml
-    needs: determine_base
-    if: ${{ needs.determine_base.outputs.need_to_run != 'false' }}
     with:
       fork: python
-      ref: ${{ needs.determine_base.outputs.ref }}
+      ref: ${{ inputs.base_version }}
       machine: ${{ inputs.machine }}
       benchmarks: ${{ inputs.benchmarks }}
       pgo: true
@@ -99,12 +71,9 @@ jobs:
 
   pystats-base:
     uses: ./.github/workflows/_pystats.yml
-    needs: determine_base
-    if: ${{ inputs.pystats && needs.determine_base.outputs.need_to_run != 'false'
-      }}
     with:
       fork: python
-      ref: ${{ needs.determine_base.outputs.ref }}
+      ref: ${{ inputs.base_version }}
       benchmarks: ${{ inputs.benchmarks }}
       force: false
     secrets: inherit

@@ -1,4 +1,3 @@
-# Generated file: !!! DO NOT EDIT !!!
 ---
 name: _benchmark
 
@@ -10,7 +9,7 @@ on:
   workflow_call:
     inputs:
       fork:
-        description: Fork of cpython to benchmark
+        description: Fork of cinder to benchmark
         type: string
       ref:
         description: Branch, tag or (full) SHA commit to benchmark
@@ -37,9 +36,9 @@ on:
   workflow_dispatch:
     inputs:
       fork:
-        description: Fork of cpython to benchmark
+        description: Fork of cinder to benchmark
         type: string
-        default: python
+        default: facebookincubator
       ref:
         description: Branch, tag or (full) SHA commit to benchmark
         type: string
@@ -49,7 +48,7 @@ on:
         default: linux-amd64
         type: choice
         options:
-        - linux-x64-linux-x64-ec2runner
+        - linux-x64-ec2runner
         - all
       benchmarks:
         description: Benchmarks to run (comma-separated; empty runs all benchmarks)
@@ -68,7 +67,34 @@ on:
         type: boolean
 
 jobs:
+
+  setup:
+    runs-on: [self-hosted, Linux, bare-metal, linux-x64-ec2runner]
+
+    steps:
+    - name: Install System Dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y python3 build-essential ccache gdb lcov pkg-config \
+        libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev \
+        libncurses5-dev libreadline-dev libsqlite3-dev libssl-dev \
+        lzma lzma-dev tk-dev uuid-dev zlib1g-dev linux-tools-generic
+
+    - name: Enable ccache
+      run: |
+        sudo /usr/sbin/update-ccache-symlinks
+        echo 'export PATH="/usr/lib/ccache:$PATH"' | tee -a ~/.bashrc
+
+    - name: Cache ccache files
+      uses: actions/cache@v3
+      with:
+        path: ~/.ccache
+        key: ${{ runner.os }}-ccache-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-ccache-
+
   benchmark-linux-x64-ec2runner:
+    needs: setup
     runs-on: [self-hosted, Linux, bare-metal, linux-x64-ec2runner]
 
     steps:
@@ -79,63 +105,61 @@ jobs:
         cache: pip
     - uses: actions/checkout@v3
       with:
-        repository: ${{ inputs.fork }}/cpython
-        path: cpython
+        repository: ${{ inputs.fork }}/cinder
+        path: cinder
         ref: ${{ inputs.ref }}
         fetch-depth: 50
     - name: Install dependencies
       run: |
         python -m venv venv
         venv/bin/python -m pip install -r requirements.txt
-    - name: Should we run?
-      if: ${{ always() }}
-      id: should_run
-      run: |
-        venv/bin/python -m bench_runner.scripts.should_run ${{ inputs.force }} ${{ inputs.fork }} ${{ inputs.ref }} ${{ inputs.machine }} >> $GITHUB_OUTPUT
+    # - name: Should we run?
+    #   if: ${{ always() }}
+    #   id: should_run
+    #   run: |
+    #     venv/bin/python -m bench_runner.scripts.should_run ${{ inputs.force }} ${{ inputs.fork }} ${{ inputs.ref }} ${{ inputs.machine }} >> $GITHUB_OUTPUT
     - uses: actions/checkout@v3
-      if: ${{ steps.should_run.outputs.should_run != 'false' }}
       with:
         repository: pyston/python-macrobenchmarks
         path: pyston-benchmarks
         ref: ${{ env.PYSTON_BENCHMARKS_HASH }}
     - uses: actions/checkout@v3
-      if: ${{ steps.should_run.outputs.should_run != 'false' }}
       with:
         repository: python/pyperformance
         path: pyperformance
         ref: ${{ env.PYPERFORMANCE_HASH }}
     - name: Build Python
-      if: ${{ steps.should_run.outputs.should_run != 'false' }}
       run: |
-        cd cpython
-        ./configure ${{ inputs.pgo == true && '--enable-optimizations --with-lto=yes' || '' }}
-        make -j4
+        cd cinder
+        ./configure --with-pydebug
+        make -s
     - name: Install pyperformance
-      if: ${{ steps.should_run.outputs.should_run != 'false' }}
       run: |
         venv/bin/python -m pip install --no-binary :all: ./pyperformance
+    - name: Load msr module
+      run: sudo modprobe msr
     - name: Tune system
-      if: ${{ steps.should_run.outputs.should_run != 'false' }}
       run: |
         sudo LD_LIBRARY_PATH=$LD_LIBRARY_PATH venv/bin/python -m pyperf system tune
     - name: Tune for perf
-      if: ${{ steps.should_run.outputs.should_run != 'false' && inputs.perf }}
       run: |
         sudo bash -c "echo 100000 > /proc/sys/kernel/perf_event_max_sample_rate"
+    # Creating a symbolic link between 'cinder' and 'cpython'.
+    # Some scripts and tools expect the Python source to be in a directory named 'cpython'.
+    # This link ensures compatibility without needing to modify those scripts.
+    - name: Create symbolic link between cinder and cpython
+      run: ln -s cinder cpython
     - name: Running pyperformance
-      if: ${{ steps.should_run.outputs.should_run != 'false' }}
       run: |
         rm -rf ~/.debug/*
-        venv/bin/python -m bench_runner.scripts.run_benchmarks benchmark cpython/python ${{ inputs.fork }} ${{ inputs.ref }} ${{ inputs.benchmarks || 'all' }} ${{ inputs.perf }} --run_id ${{ github.run_id }}
+        venv/bin/python ./scripts/run_benchmarks.py benchmark cinder/python ${{ inputs.fork }} ${{ inputs.ref }} "${{ inputs.benchmarks || 'all' }}" --run_id ${{ github.run_id }}
     - name: Upload benchmark artifacts
-      if: ${{ steps.should_run.outputs.should_run != 'false' && !inputs.perf }}
       uses: actions/upload-artifact@v3
       with:
         name: benchmark
         path: |
           benchmark.json
     - name: Upload perf artifacts
-      if: ${{ steps.should_run.outputs.should_run != 'false' && inputs.perf }}
       uses: actions/upload-artifact@v3
       with:
         name: perf
@@ -143,8 +167,6 @@ jobs:
           profiling/results
       # Pull again, since another job may have committed results in the meantime
     - name: pull
-      if: ${{ steps.should_run.outputs.should_run != 'false' && !inputs.dry_run &&
-        !inputs.perf }}
       run: |
         # Another benchmarking task may have created results for the same
         # commit while the above was running. This "magic" incantation means
@@ -152,8 +174,6 @@ jobs:
         # just pulled in in that case.
         git pull -s recursive -X ours --autostash --rebase
     - name: Add to repo
-      if: ${{ steps.should_run.outputs.should_run != 'false' && !inputs.dry_run &&
-        !inputs.perf }}
       uses: EndBug/add-and-commit@v9
       with:
         add: results
