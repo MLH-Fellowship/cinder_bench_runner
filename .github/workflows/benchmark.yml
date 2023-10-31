@@ -71,6 +71,7 @@ jobs:
 
   pystats-base:
     uses: ./.github/workflows/_pystats.yml
+    if: ${{ inputs.pystats }}
     with:
       fork: python
       ref: ${{ inputs.base_version }}
