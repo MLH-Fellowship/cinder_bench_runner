@@ -131,7 +131,7 @@ jobs:
     - name: Build Python
       run: |
         cd cinder
-        ./configure --with-pydebug
+        ./configure --enable-optimizations --with-lto
         make -s
     - name: Install pyperformance
       run: |
