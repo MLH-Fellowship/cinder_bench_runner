@@ -135,8 +135,8 @@ jobs:
       if: ${{ steps.should_run.outputs.should_run != 'false' }}
       run: |
         cd cpython
-        ./configure ${{ inputs.pgo == true && '--enable-optimizations --with-lto=yes' || '' }}
-        make -j4
+        ./configure --with-pydebug
+        make -s
     - name: Install pyperformance
       if: ${{ steps.should_run.outputs.should_run != 'false' }}
       run: |
