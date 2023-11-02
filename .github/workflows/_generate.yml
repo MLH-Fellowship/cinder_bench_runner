@@ -37,6 +37,10 @@ jobs:
       - name: regenerate
         run:
           python -m bench_runner.scripts.generate_results ${{ inputs.force == true && '--force' || '' }}
+      - name: List generated files
+        run: |
+          # List files in the working directory
+          ls -R
       - name: Add to repo
         uses: EndBug/add-and-commit@v9
         if: ${{ !inputs.dry_run }}

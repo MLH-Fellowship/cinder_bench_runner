@@ -142,6 +142,7 @@ jobs:
       run: |
         sudo LD_LIBRARY_PATH=$LD_LIBRARY_PATH venv/bin/python -m pyperf system tune
     - name: Tune for perf
+      if: ${{ inputs.perf }}
       run: |
         sudo bash -c "echo 100000 > /proc/sys/kernel/perf_event_max_sample_rate"
     # Creating a symbolic link between 'cinder' and 'cpython'.
@@ -154,12 +155,14 @@ jobs:
         rm -rf ~/.debug/*
         venv/bin/python ./scripts/run_benchmarks.py benchmark cinder/python ${{ inputs.fork }} ${{ inputs.ref }} "${{ inputs.benchmarks || 'all' }}" --run_id ${{ github.run_id }}
     - name: Upload benchmark artifacts
+      if: ${{ !inputs.perf }}
       uses: actions/upload-artifact@v3
       with:
         name: benchmark
         path: |
           benchmark.json
     - name: Upload perf artifacts
+      if: ${{ inputs.perf }}
       uses: actions/upload-artifact@v3
       with:
         name: perf
@@ -167,6 +170,7 @@ jobs:
           profiling/results
       # Pull again, since another job may have committed results in the meantime
     - name: pull
+      if: ${{ !inputs.dry_run && !inputs.perf }}
       run: |
         # Another benchmarking task may have created results for the same
         # commit while the above was running. This "magic" incantation means
@@ -174,6 +178,7 @@ jobs:
         # just pulled in in that case.
         git pull -s recursive -X ours --autostash --rebase
     - name: Add to repo
+      if: ${{ !inputs.dry_run && !inputs.perf }}
       uses: EndBug/add-and-commit@v9
       with:
         add: results
