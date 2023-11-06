@@ -82,7 +82,7 @@ jobs:
   generate:
     uses: ./.github/workflows/_generate.yml
     with:
-      force: false
+      force: true
     if: ${{ always() }}
     needs: [head, base, pystats-head, pystats-base]
     secrets: inherit
